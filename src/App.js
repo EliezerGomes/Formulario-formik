@@ -5,7 +5,7 @@ import Basic from './components/Form';
 function App() {
   return (
     <div className="App">
-      <Basic/>
+      <Formularios/>
     </div>
   );
 }

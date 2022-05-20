@@ -1,21 +1,9 @@
-import { Formik, Form, Field } from 'formik';
+import { Formik, Form, Field, ErrorMessage } from 'formik';
 import React from 'react';
+import Schema from './Schema';
 
 const Formularios = () => {
 
-    function Validate(values){
-        const erros = {}
-
-        if(!values.name){
-            erros.name = 'Nome é obrigatório'
-        }
-    
-        if(!values.email){
-            erros.email = 'Email é obrigatório'
-        }
-    
-        return erros
-    }
 
     return ( 
         <Formik 
@@ -23,22 +11,22 @@ const Formularios = () => {
         onSubmit={(values) => {
             console.log(values)
         }}
-        validate = {Validate}
+        validateOnMount
+        validationSchema={Schema}
         >
         
-        {({erros}) => (
+        {({errors, touched}) => (
             <Form>
                 <div>
                     <label>Nome:</label>
                     <Field name='name' type='text'/>
-                    {erros.name && (
-                        <span>{erros.name}</span>
-                    )}
+                    <ErrorMessage name='name'/>
                 </div>
 
                 <div>
                     <label>Email:</label>
                     <Field name='email' type='text'/>
+                    <ErrorMessage name='email'/>
                 </div>
                 <button type='submit'>Enviar</button>
             </Form>  
